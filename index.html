@@ -1,0 +1,219 @@
+<html>
+	<head>
+		<title>User Registration</title>
+		<meta charset="UTF-8">
+		<html lang="en">
+		<style>
+			td{
+				padding: 10px 0px;
+			}
+			button{
+				padding: 2px 25px;
+				border-radius: 5px;
+			}
+			input, select{
+				width: 250px; 
+				height: 20px;
+			}
+			progress{
+/*				/*To reset the default styles, we simply set -webkit-appearance to none.*/
+				-webkit-appearance: none; 
+   				appearance: none;
+				height: 20px;
+				width: 150px;
+				background-color: #4CAF50;
+			}
+		</style>
+		<script src="modernizr.js"></script>
+		<script type="text/javascript">
+
+		if (!Modernizr.localstorage) {
+			alert('Your Browser Doesn\'t Support Local Storage.');
+		}
+
+		function checkPasswordStrength(){
+			var strengthBar = document.getElementById("pwdStrength");
+			var pwdInput = document.getElementById("pwd").value;
+
+			var enough = /(?=(.*[a-z]){5,})(?=(.*[0-9]){1,})(?=(.*[@#$%]){1,})/;
+			var medium = /(?=(.*[A-Z]){1,})(?=(.*[0-9]){2,})(?=(.*[a-z]){4,})(?=(.*[@#$%]){2,})/;
+			var strong = /(?=(.*[A-Z]){3,})(?=(.*[0-9]){3,})(?=(.*[a-z]){2,})(?=(.*[@#$%]){3,})/;
+
+			if(strong.test(pwdInput)) {
+				console.log("100");
+				strengthBar.value = 100;
+			} else if (medium.test(pwdInput)) {
+				console.log("90");
+				strengthObject.value = 90;
+			} else if (enough.test(pwdInput)) {
+				console.log("80");
+				strengthBar.value = 80;
+			} else {
+				strengthBar.value = 50;
+			}
+
+		}
+		function validatePassword(){
+			var pwd = document.getElementById("pwd").value;
+			var vpwd = document.getElementById("vpwd").value;
+
+			if(pwd == vpwd){
+				var msg = document.getElementById("pwdVerificationMsg");
+				msg.innerHTML = "Password Matches!";
+				msg.style.color = "Green";
+			}else{
+				var msg = document.getElementById("pwdVerificationMsg");
+				msg.innerHTML = "Password doesn't Match!";	
+				msg.style.color = "Red";
+			}
+		}
+		function validateEmail(){
+			var email = document.getElementById("email").value;
+			var vemail = document.getElementById("vemail").value;
+			if(email == vemail){
+				var msg = document.getElementById("verificationMsg");
+				msg.innerHTML = "Email Address Matches!";
+				msg.style.color = "Green";
+			}else{
+				var msg = document.getElementById("verificationMsg");
+				msg.innerHTML = "Email Address doesn't Match!";
+				msg.style.color = "Red";
+			}
+		}
+		function storeSessionStorage(){
+
+			sessionStorage.setItem("fname", document.myform.fname.value); 
+			sessionStorage.setItem("lname", document.myform.lname.value); 
+			sessionStorage.setItem("uid", document.myform.uid.value);
+			sessionStorage.setItem("dob1", document.myform.dob1.value); 
+			sessionStorage.setItem("dob2", document.myform.dob2.value);
+			sessionStorage.setItem("dob3", document.myform.dob3.value);
+			sessionStorage.setItem("email", document.myform.email.value);
+			sessionStorage.setItem("vemail", document.myform.vemail.value);
+			sessionStorage.setItem("pwd", document.myform.pwd.value);
+			sessionStorage.setItem("vpwd", document.myform.vpwd.value);
+			sessionStorage.setItem("sec_question", document.myform.sec_question.value);
+			sessionStorage.setItem("mob", document.myform.mob.value);
+			sessionStorage.setItem("ssn", document.myform.ssn.value);
+			sessionStorage.setItem("cc", document.myform.cc.value);
+			sessionStorage.setItem("address", document.myform.address.value);
+			sessionStorage.setItem("interests", document.myform.interest.value);
+
+			storeLocalStorage();
+			}
+
+		function storeLocalStorage(){
+
+			localStorage.setItem("fname", document.myform.fname.value); 
+			localStorage.setItem("lname", document.myform.lname.value); 
+			localStorage.setItem("uid", document.myform.uid.value);
+			localStorage.setItem("dob1", document.myform.dob1.value); 
+			localStorage.setItem("dob2", document.myform.dob2.value);
+			localStorage.setItem("dob3", document.myform.dob3.value);
+			localStorage.setItem("email", document.myform.email.value);
+			localStorage.setItem("vemail", document.myform.vemail.value);
+			localStorage.setItem("pwd", document.myform.pwd.value);
+			localStorage.setItem("vpwd", document.myform.vpwd.value);
+			localStorage.setItem("sec_question", document.myform.sec_question.value);
+			localStorage.setItem("mob", document.myform.mob.value);
+			localStorage.setItem("ssn", document.myform.ssn.value);
+			localStorage.setItem("cc", document.myform.cc.value);
+			localStorage.setItem("address", document.myform.address.value);
+			localStorage.setItem("interests", document.myform.interest.value);
+			}
+
+		</script>
+	</head>
+	<body>
+		<form name="myform">
+			<table border="0" align="center">
+				<th colspan="3" style="text-align:left"><h2>Registration Form</h2> <hr></th>
+				<tr>
+					<td>First Name</td>
+					<td><input type="text" id="fname" name="fname" autofocus placeholder="Enter First Name" required></td>
+				</tr>
+				<tr>
+					<td>Last Name</td>
+					<td><input type="text" id="lname" name="lname" placeholder="Enter Last Name" required></td>
+				</tr>
+				<tr>
+					<td>User ID</td>
+					<td><input type="text" id="uid" name="userid" placeholder="Enter User ID" required></td>
+				</tr>
+				<tr>
+					<td>D.O.B</td>
+					<td><input type="date" id="dob1" name="dob"></td>
+				</tr>
+				<tr>
+					<td>D.O.B with Time</td>
+					<td><input type="time" id="dob2" name="dob"></td>
+				</tr>
+				<tr>
+					<td>Local D.O.B</td>
+					<td><input type="datetime-local" id="dob3" name="dob"></td>
+				</tr>
+				<tr>
+					<td>Email Address</td>
+					<td><input type="email" id="email" name="email_add" placeholder="Enter Email Address" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" required ></td>
+				</tr>
+				<tr>
+					<td>Verify Email Address &nbsp;&nbsp;</td>
+					<td><input type="email" id="vemail" name="vemail_add" required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" placeholder="Must be same as Email Address" title="Enter the same email address as above"></td>
+					<td><span id="verificationMsg"></span></td>
+				</tr>
+				<tr>
+					<td>Password</td>
+					<td><input type="password" id="pwd" name="password" placeholder="Enter password" required onkeyup="validateEmail();"  title="Must be between 7-20 characters in length and include 4 alpha characters; 1 numeric character(0,9) or 1 special character (!,#,$,%). The password is case sensitive and must not contain spaces or be the same as your user id"></td>
+					<td><progress id="pwdStrength" value="0" max="100"></progress></td>
+				</tr>
+				<tr>
+					<td>Verify Password</td>
+					<td><input type="password" id="vpwd" name="vpassword" required placeholder="Must be same as password" onkeyup="checkPasswordStrength();"</td>
+					<td><span id="pwdVerificationMsg"></span></td>
+				</tr>
+				<tr>
+					<td>Security Question</td>
+					<td><select onkeyup= "validatePassword();">
+						<option value="Sum of 100 + 200">Sum of 100 + 200</option>
+						<option value="23 * 100 = ">23 * 100 = </option>
+						<option value="Capital of India?">Capital of India?</option>
+						<option value="Capital of USA?">Capital of USA?</option>
+						</select>
+					</td>
+				</tr>
+				<tr>
+					<td>Security Answer</td>
+					<td><input type="text" id="sec_question" required title="Please answer a security question"></td>
+				</tr>
+				<tr>
+					<td>Mobile Number</td>
+					<td><input type="tel" id="mob" name="mobile" placeholder="###-###-####" required pattern="[0-9]{3}[0-9]{3}[0-9]{4}" title="Required format ###-###-####"></td>
+				</tr>
+				<tr>
+					<td>SSN</td>
+					<td><input type="text" id="ssn" name="ssn" placeholder="###-##-####" required pattern="[0-9]{3}[0-9]{2}[0-9]{4}" title="Required format ###-##-####"></td>
+				</tr>
+				<tr>
+					<td>Credit Card</td>
+					<td><input type="text" id="cc" name="cc" placeholder="####-####-####-####" required pattern="[0-9]{4}[0-9]{4}[0-9]{4}[0-9]{4}" title="Required format ####-####-####-####"></td>
+				</tr>
+				<tr>
+					<td>Address</td>
+					<td colspan="2"><textarea name="" id="address" cols="60" rows="4" required></textarea></td>
+				</tr>
+				<tr>
+					<td>Areas of Interested</td>
+					<td colspan="2"><textarea name="" id="interests" cols="60" rows="4"></textarea></td>
+				</tr>
+				<tr>
+					<td></td>
+					<td>
+						<button type="submit" value="Register" onClick="storeSessionStorage();">Register</button>
+						<button type="reset" name="reset">Cancel</button>
+					</td>
+					<td></td>
+				</tr>
+			</table>
+		</form>
+	</body>
+</html>
